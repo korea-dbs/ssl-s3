@@ -25,15 +25,6 @@ add_custom_command(
     COMMENT "Configuring SQLite"
 )
 
-# Custom command to build SQLite
-add_custom_command(
-    OUTPUT ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a
-    COMMAND make -j
-    WORKING_DIRECTORY ${SQLITE_BUILD_DIR}
-    DEPENDS ${SQLITE_BUILD_DIR}/Makefile
-    COMMENT "Building SQLite library"
-)
-
 # Add a custom target for SQLite
 add_custom_target(
     sqlite3_target
@@ -43,11 +34,27 @@ add_custom_target(
 # Find AWS SDK for C++
 find_package(AWSSDK REQUIRED COMPONENTS s3)
 
+add_library(s3sqliteShared SHARED src/s3_helper.cpp)
+add_library(s3sqlite STATIC src/s3_helper.cpp)
+
+install(TARGETS s3sqlite DESTINATION lib)
+install(FILES include/s3_wrapper.h DESTINATION include)
 # Add main project executable
 add_executable(${PROJECT_NAME}
     src/main.cpp
 	src/s3_wrapper.cpp
+	src/s3_helper.cpp
 )
+
+# Custom command to build SQLite
+add_custom_command(
+    OUTPUT ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a
+    COMMAND make -j
+    WORKING_DIRECTORY ${SQLITE_BUILD_DIR}
+    DEPENDS ${SQLITE_BUILD_DIR}/Makefile
+    COMMENT "Building SQLite library"
+)
+
 
 include_directories(${SQLITE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/include)
@@ -71,4 +78,6 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${SQLITE_BUILD_DIR}/.libs/lib${SQL
 		)
 
 # Ensure SQLite is built before the main project
+
+add_dependencies(sqlite3_target s3sqlite)
 add_dependencies(${PROJECT_NAME} sqlite3_target)

@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/local/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/usr/local/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/usr/local/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/user/git/sqlite-cloud-s3/bld/CMakeFiles /home/user/git/sqlite-cloud-s3/bld//CMakeFiles/progress.marks
@@ -130,6 +175,32 @@ sqlite3_target/fast:
 .PHONY : sqlite3_target/fast
 
 #=============================================================================
+# Target rules for targets named s3sqliteShared
+
+# Build rule for target.
+s3sqliteShared: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 s3sqliteShared
+.PHONY : s3sqliteShared
+
+# fast build rule for target.
+s3sqliteShared/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqliteShared.dir/build.make CMakeFiles/s3sqliteShared.dir/build
+.PHONY : s3sqliteShared/fast
+
+#=============================================================================
+# Target rules for targets named s3sqlite
+
+# Build rule for target.
+s3sqlite: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 s3sqlite
+.PHONY : s3sqlite
+
+# fast build rule for target.
+s3sqlite/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqlite.dir/build.make CMakeFiles/s3sqlite.dir/build
+.PHONY : s3sqlite/fast
+
+#=============================================================================
 # Target rules for targets named sqlite3-cloud-s3
 
 # Build rule for target.
@@ -166,6 +237,36 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sqlite3-cloud-s3.dir/build.make CMakeFiles/sqlite3-cloud-s3.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/s3_helper.o: src/s3_helper.cpp.o
+.PHONY : src/s3_helper.o
+
+# target to build an object file
+src/s3_helper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqliteShared.dir/build.make CMakeFiles/s3sqliteShared.dir/src/s3_helper.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqlite.dir/build.make CMakeFiles/s3sqlite.dir/src/s3_helper.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sqlite3-cloud-s3.dir/build.make CMakeFiles/sqlite3-cloud-s3.dir/src/s3_helper.cpp.o
+.PHONY : src/s3_helper.cpp.o
+
+src/s3_helper.i: src/s3_helper.cpp.i
+.PHONY : src/s3_helper.i
+
+# target to preprocess a source file
+src/s3_helper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqliteShared.dir/build.make CMakeFiles/s3sqliteShared.dir/src/s3_helper.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqlite.dir/build.make CMakeFiles/s3sqlite.dir/src/s3_helper.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sqlite3-cloud-s3.dir/build.make CMakeFiles/sqlite3-cloud-s3.dir/src/s3_helper.cpp.i
+.PHONY : src/s3_helper.cpp.i
+
+src/s3_helper.s: src/s3_helper.cpp.s
+.PHONY : src/s3_helper.s
+
+# target to generate assembly for a file
+src/s3_helper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqliteShared.dir/build.make CMakeFiles/s3sqliteShared.dir/src/s3_helper.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqlite.dir/build.make CMakeFiles/s3sqlite.dir/src/s3_helper.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sqlite3-cloud-s3.dir/build.make CMakeFiles/sqlite3-cloud-s3.dir/src/s3_helper.cpp.s
+.PHONY : src/s3_helper.cpp.s
+
 src/s3_wrapper.o: src/s3_wrapper.cpp.o
 .PHONY : src/s3_wrapper.o
 
@@ -197,12 +298,21 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... sqlite3_target"
+	@echo "... s3sqlite"
+	@echo "... s3sqliteShared"
 	@echo "... sqlite3-cloud-s3"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/s3_helper.o"
+	@echo "... src/s3_helper.i"
+	@echo "... src/s3_helper.s"
 	@echo "... src/s3_wrapper.o"
 	@echo "... src/s3_wrapper.i"
 	@echo "... src/s3_wrapper.s"

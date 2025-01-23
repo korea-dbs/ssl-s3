@@ -3987,7 +3987,13 @@ int sqlite3WalCheckpoint(
 ** sqlite3WalCallback() was called.  If no commits have occurred since
 ** the last call, then return 0.
 */
+
+#include "../../include/s3_helper.h"
+
 int sqlite3WalCallback(Wal *pWal) {
+
+	myCppFunction();
+
   u32 ret = 0;
   if( pWal ){
     ret = pWal->iCallback;
