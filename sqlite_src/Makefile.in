@@ -29,9 +29,9 @@ BCC = @BUILD_CC@ @BUILD_CFLAGS@
 # on the "make" command-line.  Ex:  "make CC=clang CFLAGS=-fsanitize=undefined"
 #
 CC = @CC@
-CFLAGS = @CPPFLAGS@ @CFLAGS@ 
-LDFLAGS = -L/usr/local/lib #-L${TOP}/../bld/ -ls3sqlite
-TCC = ${CC} ${CFLAGS} -I. -I${TOP}/src -I${TOP}/ext/rtree -I${TOP}/ext/icu -I${TOP}/../include
+CFLAGS = @CPPFLAGS@ @CFLAGS@ -ls3 
+LDFLAGS = -L/usr/local/lib -L/usr/lib -ls3
+TCC = ${CC} ${CFLAGS} -I. -I${TOP}/src -I${TOP}/ext/rtree -I${TOP}/ext/icu
 TCC += -I${TOP}/ext/fts3 -I${TOP}/ext/async -I${TOP}/ext/session
 TCC += -I${TOP}/ext/userauth
 
@@ -69,7 +69,7 @@ TCC += -DSQLITE_THREADSAFE=@SQLITE_THREADSAFE@
 
 # Any target libraries which libsqlite must be linked against
 #
-TLIBS = @LIBS@ $(LIBS) -L${TOP}/../bld -ls3sqlite -lstdc++
+TLIBS = @LIBS@ $(LIBS) 
 
 # Flags controlling use of the in memory btree implementation
 #

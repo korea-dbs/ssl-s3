@@ -71,7 +71,7 @@ set(AWS_SDK_LIBS
 )
 
 # Link SQLite library to the main project
-target_link_libraries(${PROJECT_NAME} PRIVATE ${AWS_SDK_LIBS} ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a -lpthread -ldl
+target_link_libraries(${PROJECT_NAME} PRIVATE ${AWS_SDK_LIBS} ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a -lpthread -ldl -ls3
 )
 
 # Ensure SQLite is built before the main project
