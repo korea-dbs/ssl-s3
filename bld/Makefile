@@ -162,19 +162,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named sqlite3_target
-
-# Build rule for target.
-sqlite3_target: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sqlite3_target
-.PHONY : sqlite3_target
-
-# fast build rule for target.
-sqlite3_target/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/sqlite3_target.dir/build.make CMakeFiles/sqlite3_target.dir/build
-.PHONY : sqlite3_target/fast
-
-#=============================================================================
 # Target rules for targets named s3sqliteShared
 
 # Build rule for target.
@@ -199,6 +186,19 @@ s3sqlite: cmake_check_build_system
 s3sqlite/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/s3sqlite.dir/build.make CMakeFiles/s3sqlite.dir/build
 .PHONY : s3sqlite/fast
+
+#=============================================================================
+# Target rules for targets named sqlite3_target
+
+# Build rule for target.
+sqlite3_target: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sqlite3_target
+.PHONY : sqlite3_target
+
+# fast build rule for target.
+sqlite3_target/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sqlite3_target.dir/build.make CMakeFiles/sqlite3_target.dir/build
+.PHONY : sqlite3_target/fast
 
 #=============================================================================
 # Target rules for targets named sqlite3-cloud-s3

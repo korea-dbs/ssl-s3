@@ -16,6 +16,15 @@ file(MAKE_DIRECTORY ${SQLITE_BUILD_DIR})
 # SQLite output library name
 set(SQLITE_LIBRARY sqlite3)
 
+# Find AWS SDK for C++
+find_package(AWSSDK REQUIRED COMPONENTS s3)
+
+add_library(s3sqliteShared SHARED src/s3_helper.cpp)
+add_library(s3sqlite STATIC src/s3_helper.cpp)
+install(TARGETS s3sqlite DESTINATION lib)
+install(FILES include/s3_wrapper.h DESTINATION include)
+
+
 # Custom command to configure SQLite
 add_custom_command(
     OUTPUT ${SQLITE_BUILD_DIR}/Makefile
@@ -31,21 +40,6 @@ add_custom_target(
     DEPENDS ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a
 )
 
-# Find AWS SDK for C++
-find_package(AWSSDK REQUIRED COMPONENTS s3)
-
-add_library(s3sqliteShared SHARED src/s3_helper.cpp)
-add_library(s3sqlite STATIC src/s3_helper.cpp)
-
-install(TARGETS s3sqlite DESTINATION lib)
-install(FILES include/s3_wrapper.h DESTINATION include)
-# Add main project executable
-add_executable(${PROJECT_NAME}
-    src/main.cpp
-	src/s3_wrapper.cpp
-	src/s3_helper.cpp
-)
-
 # Custom command to build SQLite
 add_custom_command(
     OUTPUT ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a
@@ -56,15 +50,20 @@ add_custom_command(
 )
 
 
+# Add main project executable
+add_executable(${PROJECT_NAME}
+    src/main.cpp
+	src/s3_wrapper.cpp
+	src/s3_helper.cpp
+)
+
+
 include_directories(${SQLITE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/include)
-
 
 set(SDK_INSTALL_LIB_DIR "/sdk-install/lib")
 set(SDK_INSTALL_INCLUDE_DIR "/sdk-install/include")
 include_directories(${SDK_INSTALL_INCLUDE_DIR})
-
-
 link_directories(${SDK_INSTALL_LIB_DIR})
 set(AWS_SDK_LIBS
     aws-cpp-sdk-core
@@ -72,12 +71,9 @@ set(AWS_SDK_LIBS
 )
 
 # Link SQLite library to the main project
-target_link_libraries(${PROJECT_NAME} PRIVATE ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a -lpthread -ldl
-		${AWS_SDK_LIBS}
-#		-laws-cpp-sdk-s3 -laws-cpp-sdk-core
-		)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${AWS_SDK_LIBS} ${SQLITE_BUILD_DIR}/.libs/lib${SQLITE_LIBRARY}.a -lpthread -ldl
+)
 
 # Ensure SQLite is built before the main project
 
-add_dependencies(sqlite3_target s3sqlite)
 add_dependencies(${PROJECT_NAME} sqlite3_target)

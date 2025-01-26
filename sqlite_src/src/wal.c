@@ -3988,12 +3988,9 @@ int sqlite3WalCheckpoint(
 ** the last call, then return 0.
 */
 
-#include "../../include/s3_helper.h"
-
+//#include "../../include/s3_helper.h"
 int sqlite3WalCallback(Wal *pWal) {
-
-	myCppFunction();
-
+	//UploadFileToS3();
   u32 ret = 0;
   if( pWal ){
     ret = pWal->iCallback;
