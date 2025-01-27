@@ -372,6 +372,7 @@ set flist {
    rowset.c
    pager.c
    wal.c
+   s3_wrapper.c
 
    btmutex.c
    btree.c

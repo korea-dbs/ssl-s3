@@ -193,7 +193,7 @@ LIBOBJS0 = alter.lo analyze.lo attach.lo auth.lo \
          update.lo userauth.lo upsert.lo util.lo vacuum.lo \
          vdbe.lo vdbeapi.lo vdbeaux.lo vdbeblob.lo vdbemem.lo vdbesort.lo \
          vdbetrace.lo vdbevtab.lo \
-         wal.lo walker.lo where.lo wherecode.lo whereexpr.lo \
+         wal.lo walker.lo where.lo wherecode.lo whereexpr.lo s3_wrapper.lo \
          window.lo utf.lo vtab.lo
 
 # Object files for the amalgamation.
@@ -307,6 +307,8 @@ SRC = \
   $(TOP)/src/vxworks.h \
   $(TOP)/src/wal.c \
   $(TOP)/src/wal.h \
+  $(TOP)/src/s3_wrapper.c \
+  $(TOP)/src/s3_wrapper.h \
   $(TOP)/src/walker.c \
   $(TOP)/src/where.c \
   $(TOP)/src/wherecode.c \
@@ -475,6 +477,7 @@ TESTSRC2 = \
   $(TOP)/src/global.c \
   $(TOP)/src/insert.c \
   $(TOP)/src/wal.c \
+  $(TOP)/src/s3_wrapper.c \
   $(TOP)/src/main.c \
   $(TOP)/src/mem5.c \
   $(TOP)/src/os.c \
@@ -674,13 +677,6 @@ sqlite3$(TEXE):	shell.c sqlite3.c
 	$(LTLINK) $(READLINE_FLAGS) $(SHELL_OPT) -o $@ \
 		shell.c sqlite3.c \
 		$(LIBREADLINE) $(TLIBS) -rpath "$(libdir)"
-
-SOURCES= sqlite3.c shell.c $(TOP)/src/s3_wrapper.c
-s3Sqlite: $(SOURCES)
-	$(LTLINK) $(READLINE_FLAGS) $(SHELL_OPT) -o $@ \
-	$(SOURCES)
-	$(LIBREADLINE) $(TLIBS) -rpath "$(libdir)"
-
 
 sqldiff$(TEXE):	$(TOP)/tool/sqldiff.c sqlite3.lo sqlite3.h
 	$(LTLINK) -o $@ $(TOP)/tool/sqldiff.c sqlite3.lo $(TLIBS)
@@ -1063,6 +1059,9 @@ vtab.lo:	$(TOP)/src/vtab.c $(HDR)
 
 wal.lo:	$(TOP)/src/wal.c $(HDR)
 	$(LTCOMPILE) $(TEMP_STORE) -c $(TOP)/src/wal.c
+
+s3_wrapper.lo:	$(TOP)/src/s3_wrapper.c $(HDR)
+	$(LTCOMPILE) $(TEMP_STORE) -c $(TOP)/src/s3_wrapper.c
 
 walker.lo:	$(TOP)/src/walker.c $(HDR)
 	$(LTCOMPILE) $(TEMP_STORE) -c $(TOP)/src/walker.c

@@ -94,7 +94,7 @@ BTS_PAGESIZE_FIXED	btreeInt.h	466;"	d
 BTS_PENDING	btreeInt.h	473;"	d
 BTS_READ_ONLY	btreeInt.h	465;"	d
 BTS_SECURE_DELETE	btreeInt.h	467;"	d
-BYTESWAP32	wal.c	714;"	d	file:
+BYTESWAP32	wal.c	715;"	d	file:
 BenignMallocHooks	fault.c	/^static SQLITE_WSD struct BenignMallocHooks {$/;"	s	file:
 BenignMallocHooks	fault.c	/^typedef struct BenignMallocHooks BenignMallocHooks;$/;"	t	typeref:struct:BenignMallocHooks	file:
 Bitmask	sqliteInt.h	/^  typedef SQLITE_BITMASK_TYPE Bitmask;$/;"	t
@@ -440,6 +440,7 @@ FKey	sqliteInt.h	/^struct FKey {$/;"	s
 FKey	sqliteInt.h	/^typedef struct FKey FKey;$/;"	t	typeref:struct:FKey
 FLAG_SIGNED	printf.c	62;"	d	file:
 FLAG_STRING	printf.c	63;"	d	file:
+FOPEN_EXTRA_FLAGS	s3_wrapper.c	4;"	d	file:
 FOREGUARD	mem2.c	68;"	d	file:
 FOUR_BYTE_INT	vdbeaux.c	3955;"	d	file:
 FOUR_BYTE_UINT	vdbeaux.c	3954;"	d	file:
@@ -483,10 +484,10 @@ GLOBAL	sqliteInt.h	1195;"	d
 GLOBAL	sqliteInt.h	1201;"	d
 GroupConcatCtx	func.c	/^} GroupConcatCtx;$/;"	t	typeref:struct:__anon46	file:
 HANDLE_TO_WINFILE	os_win.c	2231;"	d	file:
-HASHTABLE_HASH_1	wal.c	598;"	d	file:
-HASHTABLE_NPAGE	wal.c	597;"	d	file:
-HASHTABLE_NPAGE_ONE	wal.c	606;"	d	file:
-HASHTABLE_NSLOT	wal.c	599;"	d	file:
+HASHTABLE_HASH_1	wal.c	599;"	d	file:
+HASHTABLE_NPAGE	wal.c	598;"	d	file:
+HASHTABLE_NPAGE_ONE	wal.c	607;"	d	file:
+HASHTABLE_NSLOT	wal.c	600;"	d	file:
 HAS_UPDATE_HOOK	vdbe.c	94;"	d	file:
 HAS_UPDATE_HOOK	vdbe.c	96;"	d	file:
 HAVE_FCHMOD	os_unix.c	192;"	d	file:
@@ -1168,7 +1169,7 @@ ProcessLocalStorage	test_wsd.c	/^typedef struct ProcessLocalStorage ProcessLocal
 ProcessLocalVar	test_wsd.c	/^struct ProcessLocalVar {$/;"	s	file:
 ProcessLocalVar	test_wsd.c	/^typedef struct ProcessLocalVar ProcessLocalVar;$/;"	t	typeref:struct:ProcessLocalVar	file:
 QR	random.c	34;"	d	file:
-READMARK_NOT_USED	wal.c	401;"	d	file:
+READMARK_NOT_USED	wal.c	402;"	d	file:
 READ_LOCK	btreeInt.h	321;"	d
 READ_UTF8	utf.c	135;"	d	file:
 REALVFS	test_osinst.c	137;"	d	file:
@@ -1534,8 +1535,8 @@ SQLITE_NOMEM_BKPT	sqliteInt.h	4407;"	d
 SQLITE_NOMEM_BKPT	sqliteInt.h	4410;"	d
 SQLITE_NOTNULL	sqliteInt.h	2272;"	d
 SQLITE_NOWILDCARDMATCH	func.c	652;"	d	file:
-SQLITE_NO_TSAN	wal.c	806;"	d	file:
-SQLITE_NO_TSAN	wal.c	808;"	d	file:
+SQLITE_NO_TSAN	wal.c	807;"	d	file:
+SQLITE_NO_TSAN	wal.c	809;"	d	file:
 SQLITE_NTUNE	sqliteInt.h	4066;"	d
 SQLITE_NULLEQ	sqliteInt.h	2271;"	d
 SQLITE_N_BTREE_META	btree.h	22;"	d
@@ -2148,31 +2149,31 @@ VisibleRowid	sqliteInt.h	2457;"	d
 VtabCtx	sqliteInt.h	/^typedef struct VtabCtx VtabCtx;$/;"	t	typeref:struct:VtabCtx
 VtabCtx	vtab.c	/^struct VtabCtx {$/;"	s	file:
 WAGGREGATE	sqliteInt.h	2089;"	d
-WALINDEX_HDR_SIZE	wal.c	474;"	d	file:
-WALINDEX_LOCK_OFFSET	wal.c	473;"	d	file:
-WALINDEX_MAX_VERSION	wal.c	278;"	d	file:
-WALINDEX_PGSZ	wal.c	609;"	d	file:
-WALTRACE	wal.c	259;"	d	file:
-WALTRACE	wal.c	261;"	d	file:
-WAL_ALL_BUT_WRITE	wal.c	295;"	d	file:
-WAL_CKPT_LOCK	wal.c	296;"	d	file:
-WAL_EXCLUSIVE_MODE	wal.c	546;"	d	file:
-WAL_FRAME_HDRSIZE	wal.c	477;"	d	file:
-WAL_HDRSIZE	wal.c	480;"	d	file:
-WAL_HEAPMEMORY_MODE	wal.c	547;"	d	file:
-WAL_MAGIC	wal.c	491;"	d	file:
-WAL_MAX_VERSION	wal.c	277;"	d	file:
-WAL_NORMAL_MODE	wal.c	545;"	d	file:
-WAL_NREADER	wal.c	299;"	d	file:
-WAL_RDONLY	wal.c	553;"	d	file:
-WAL_RDWR	wal.c	552;"	d	file:
-WAL_READ_LOCK	wal.c	298;"	d	file:
-WAL_RECOVER_LOCK	wal.c	297;"	d	file:
-WAL_RETRY	wal.c	2396;"	d	file:
+WALINDEX_HDR_SIZE	wal.c	475;"	d	file:
+WALINDEX_LOCK_OFFSET	wal.c	474;"	d	file:
+WALINDEX_MAX_VERSION	wal.c	279;"	d	file:
+WALINDEX_PGSZ	wal.c	610;"	d	file:
+WALTRACE	wal.c	260;"	d	file:
+WALTRACE	wal.c	262;"	d	file:
+WAL_ALL_BUT_WRITE	wal.c	296;"	d	file:
+WAL_CKPT_LOCK	wal.c	297;"	d	file:
+WAL_EXCLUSIVE_MODE	wal.c	547;"	d	file:
+WAL_FRAME_HDRSIZE	wal.c	478;"	d	file:
+WAL_HDRSIZE	wal.c	481;"	d	file:
+WAL_HEAPMEMORY_MODE	wal.c	548;"	d	file:
+WAL_MAGIC	wal.c	492;"	d	file:
+WAL_MAX_VERSION	wal.c	278;"	d	file:
+WAL_NORMAL_MODE	wal.c	546;"	d	file:
+WAL_NREADER	wal.c	300;"	d	file:
+WAL_RDONLY	wal.c	554;"	d	file:
+WAL_RDWR	wal.c	553;"	d	file:
+WAL_READ_LOCK	wal.c	299;"	d	file:
+WAL_RECOVER_LOCK	wal.c	298;"	d	file:
+WAL_RETRY	wal.c	2397;"	d	file:
 WAL_SAVEPOINT_NDATA	wal.h	50;"	d
-WAL_SHM_RDONLY	wal.c	554;"	d	file:
+WAL_SHM_RDONLY	wal.c	555;"	d	file:
 WAL_SYNC_FLAGS	wal.h	25;"	d
-WAL_WRITE_LOCK	wal.c	294;"	d	file:
+WAL_WRITE_LOCK	wal.c	295;"	d	file:
 WHERETRACE	sqliteInt.h	1071;"	d
 WHERETRACE	sqliteInt.h	1074;"	d
 WHERETRACE_ALL_LOOPS	where.c	5516;"	d	file:
@@ -2345,6 +2346,7 @@ _LARGEFILE_SOURCE	sqliteInt.h	95;"	d
 _LARGE_FILE	sqliteInt.h	91;"	d
 _OS_COMMON_H_	os_common.h	21;"	d
 _SQLITE_OS_H_	os.h	21;"	d
+_SQLITE_S3_WRAPPER_H_	s3_wrapper.h	2;"	d
 _USE_32BIT_TIME_T	sqliteInt.h	181;"	d
 _XOPEN_SOURCE	sqliteInt.h	410;"	d
 __declspec	test_loadext.c	/^__declspec(dllexport)$/;"	f
@@ -2498,6 +2500,7 @@ aXformType	date.c	/^} aXformType[] = {$/;"	v	typeref:struct:__anon15	file:
 absFunc	func.c	/^static void absFunc(sqlite3_context *context, int argc, sqlite3_value **argv){$/;"	f	file:
 abuse_create_function	test_func.c	/^static int SQLITE_TCLAPI abuse_create_function($/;"	f	file:
 accError	sqliteInt.h	/^  u8   accError;       \/* SQLITE_NOMEM or SQLITE_TOOBIG *\/$/;"	m	struct:sqlite3_str
+accessKeyIdG	s3_wrapper.c	/^static const char* accessKeyIdG = 0;$/;"	v	file:
 accessPayload	btree.c	/^static int accessPayload($/;"	f	file:
 accessPayloadChecked	btree.c	/^static SQLITE_NOINLINE int accessPayloadChecked($/;"	f	file:
 actionName	pragma.c	/^static const char *actionName(u8 action){$/;"	f	file:
@@ -2673,6 +2676,7 @@ autolockIoFinder	os_unix.c	/^  *(*const autolockIoFinder)(const char*,unixFile*)
 autolockIoFinderImpl	os_unix.c	/^static const sqlite3_io_methods *autolockIoFinderImpl($/;"	f	file:
 autovacuum_pages	sqlite3ext.h	/^  int (*autovacuum_pages)(sqlite3*,$/;"	m	struct:sqlite3_api_routines
 avgFinalize	func.c	/^static void avgFinalize(sqlite3_context *context){$/;"	f	file:
+awsRegionG	s3_wrapper.c	/^static const char *awsRegionG = "eu-north-1";$/;"	v	file:
 ax	insert.c	/^    } ax;$/;"	m	union:IndexIterator::__anon12	typeref:struct:IndexIterator::__anon12::__anon14	file:
 azArg	pragma.c	/^  char *azArg[2];           \/* Value of the argument and schema *\/$/;"	m	struct:PragmaVtabCursor	file:
 azArg	sqliteInt.h	/^      char **azArg;        \/* 0: module 1: schema 2: vtab name 3...: args *\/$/;"	m	struct:Table::__anon22::__anon25
@@ -3224,6 +3228,7 @@ constInsert	select.c	/^static void constInsert($/;"	f	file:
 constraintCompatibleWithOuterJoin	where.c	/^static int constraintCompatibleWithOuterJoin($/;"	f	file:
 constraintName	sqliteInt.h	/^  Token constraintName;\/* Name of the constraint currently being parsed *\/$/;"	m	struct:Parse
 constructAutomaticIndex	where.c	/^static SQLITE_NOINLINE void constructAutomaticIndex($/;"	f	file:
+contentLength	s3_wrapper.c	/^    uint64_t contentLength, originalContentLength;$/;"	m	struct:put_object_callback_data	file:
 contextMalloc	func.c	/^static void *contextMalloc(sqlite3_context *context, i64 nByte){$/;"	f	file:
 context_db_handle	sqlite3ext.h	/^  sqlite3 *(*context_db_handle)(sqlite3_context*);$/;"	m	struct:sqlite3_api_routines
 convertCompoundSelectToSubquery	select.c	/^static int convertCompoundSelectToSubquery(Walker *pWalker, Select *p){$/;"	f	file:
@@ -3317,6 +3322,7 @@ d_ino	test_windirent.h	/^  ino_t d_ino;               \/* Sequence number, do no
 d_name	test_windirent.h	/^  char d_name[NAME_MAX + 1]; \/* Name within the directory. *\/$/;"	m	struct:DIRENT
 d_next	test_windirent.h	/^  DIRENT d_next;     \/* DIRENT constructed based on "_findnext". *\/$/;"	m	struct:DIR
 data	hash.h	/^  void *data;                  \/* Data associated with this element *\/$/;"	m	struct:HashElem
+data	s3_wrapper.c	/^    char data[64 * 1024];$/;"	m	struct:growbuffer	file:
 data_count	sqlite3ext.h	/^  int  (*data_count)(sqlite3_stmt*pStmt);$/;"	m	struct:sqlite3_api_routines
 databaseIsUnmoved	pager.c	/^static int databaseIsUnmoved(Pager *pPager){$/;"	f	file:
 databaseName	main.c	/^static const char *databaseName(const char *zName){$/;"	f	file:
@@ -3668,6 +3674,7 @@ errlogFunc	func.c	/^static void errlogFunc($/;"	f	file:
 errmsg	sqlite3ext.h	/^  const char * (*errmsg)(sqlite3*);$/;"	m	struct:sqlite3_api_routines
 errmsg16	sqlite3ext.h	/^  const void * (*errmsg16)(sqlite3*);$/;"	m	struct:sqlite3_api_routines
 errorAction	vdbeInt.h	/^  u8 errorAction;         \/* Recovery action to do in case of an error *\/$/;"	m	struct:Vdbe
+errorDetailsG	s3_wrapper.c	/^static char errorDetailsG[4096] = { 0 };$/;"	v	file:
 error_offset	sqlite3ext.h	/^  int (*error_offset)(sqlite3*);$/;"	m	struct:sqlite3_api_routines
 errstr	sqlite3ext.h	/^  const char *(*errstr)(int);$/;"	m	struct:sqlite3_api_routines
 estLog	where.c	/^static LogEst estLog(LogEst N){$/;"	f	file:
@@ -3991,6 +3998,7 @@ g_start	os_common.h	/^static sqlite_uint64 g_start;$/;"	v
 gatherSelectWindows	expr.c	/^static void gatherSelectWindows(Select *p){$/;"	f	file:
 gatherSelectWindowsCallback	expr.c	/^static int gatherSelectWindowsCallback(Walker *pWalker, Expr *pExpr){$/;"	f	file:
 gatherSelectWindowsSelectCallback	expr.c	/^static int gatherSelectWindowsSelectCallback(Walker *pWalker, Select *p){$/;"	f	file:
+gb	s3_wrapper.c	/^    growbuffer *gb;$/;"	m	struct:put_object_callback_data	file:
 genCksum	test_journal.c	/^static u32 genCksum(const unsigned char *z, int n){$/;"	f	file:
 generateColumnTypes	select.c	/^static void generateColumnTypes($/;"	f	file:
 generateOutputSubroutine	select.c	/^static int generateOutputSubroutine($/;"	f	file:
@@ -4054,6 +4062,8 @@ groupConcatValue	func.c	2009;"	d	file:
 growOp3	vdbeaux.c	/^static SQLITE_NOINLINE int growOp3(Vdbe *p, int op, int p1, int p2, int p3){$/;"	f	file:
 growOpArray	vdbeaux.c	/^static int growOpArray(Vdbe *v, int nOp){$/;"	f	file:
 growVTrans	vtab.c	/^static int growVTrans(sqlite3 *db){$/;"	f	file:
+growbuffer	s3_wrapper.c	/^typedef struct growbuffer$/;"	s	file:
+growbuffer	s3_wrapper.c	/^} growbuffer;$/;"	t	typeref:struct:growbuffer	file:
 grp	pcache1.c	/^  PGroup grp;                    \/* The global PGroup for mode (2) *\/$/;"	m	struct:PCacheGlobal	file:
 guess_number_of_cores	test1.c	/^static int SQLITE_TCLAPI guess_number_of_cores($/;"	f	file:
 h	date.c	/^  int h, m;           \/* Hour and minutes *\/$/;"	m	struct:DateTime	file:
@@ -4369,6 +4379,7 @@ indexIteratorNext	insert.c	/^static Index *indexIteratorNext(IndexIterator *pIte
 indexMightHelpWithOrderBy	where.c	/^static int indexMightHelpWithOrderBy($/;"	f	file:
 indexWhereClauseMightChange	update.c	/^static int indexWhereClauseMightChange($/;"	f	file:
 indexable	whereInt.h	/^  Bitmask indexable;       \/* Bitmask of all indexable tables in the clause *\/$/;"	m	struct:WhereOrInfo
+infile	s3_wrapper.c	/^    FILE *infile;$/;"	m	struct:put_object_callback_data	file:
 info	btreeInt.h	/^  CellInfo info;            \/* A parse of the cell we are pointing at *\/$/;"	m	struct:BtCursor
 init	sqliteInt.h	/^  } init;$/;"	m	struct:sqlite3	typeref:struct:sqlite3::sqlite3InitInfo
 initAvgEq	analyze.c	/^static void initAvgEq(Index *pIdx){$/;"	f	file:
@@ -5437,6 +5448,7 @@ newmask	sqliteInt.h	/^  u32 newmask;         \/* Mask of new.* columns reference
 next	hash.h	/^  HashElem *next, *prev;       \/* Next and previous elements in the table *\/$/;"	m	struct:HashElem
 next	mem3.c	/^      u32 next;       \/* Index in mem3.aPool[] of next free chunk *\/$/;"	m	struct:Mem3Block::__anon47::__anon49	file:
 next	mem5.c	/^  int next;       \/* Index of next free chunk *\/$/;"	m	struct:Mem5Link	file:
+next	s3_wrapper.c	/^    struct growbuffer *prev, *next;$/;"	m	struct:growbuffer	typeref:struct:growbuffer::	file:
 next2	test_tclvar.c	/^static int next2(Tcl_Interp *interp, tclvar_cursor *pCur, Tcl_Obj *pObj){$/;"	f	file:
 nextAutovac	sqliteInt.h	/^  signed char nextAutovac;      \/* Autovac setting after VACUUM if >=0 *\/$/;"	m	struct:sqlite3
 nextPagesize	sqliteInt.h	/^  int nextPagesize;             \/* Pagesize after VACUUM if >0 *\/$/;"	m	struct:sqlite3
@@ -5449,6 +5461,7 @@ noLock	pager.c	/^  u8 noLock;                  \/* Do not lock (except in WAL mo
 noReuse	vdbeInt.h	/^  Bool noReuse:1;         \/* OpenEphemeral may not reuse this cursor *\/$/;"	m	struct:VdbeCursor
 noSharedCache	sqliteInt.h	/^  u8 noSharedCache;             \/* True if no shared-cache backends *\/$/;"	m	struct:sqlite3
 noSkipScan	sqliteInt.h	/^  unsigned noSkipScan:1;   \/* Do not try to use skip-scan if true *\/$/;"	m	struct:Index
+noStatus	s3_wrapper.c	/^    int noStatus;$/;"	m	struct:put_object_callback_data	file:
 noSync	pager.c	/^  u8 noSync;                  \/* Do not sync the journal if true *\/$/;"	m	struct:Pager	file:
 nocaseCollatingFunc	main.c	/^static int nocaseCollatingFunc($/;"	f	file:
 nolockCheckReservedLock	os_unix.c	/^static int nolockCheckReservedLock(sqlite3_file *NotUsed, int *pResOut){$/;"	f	file:
@@ -5549,6 +5562,7 @@ orig_pwrite64	test_syscall.c	169;"	d	file:
 orig_read	test_syscall.c	163;"	d	file:
 orig_stat	test_syscall.c	159;"	d	file:
 orig_write	test_syscall.c	166;"	d	file:
+originalContentLength	s3_wrapper.c	/^    uint64_t contentLength, originalContentLength;$/;"	m	struct:put_object_callback_data	file:
 orphanTrigger	sqliteInt.h	/^    unsigned orphanTrigger : 1; \/* Last statement is orphaned TEMP trigger *\/$/;"	m	struct:sqlite3::sqlite3InitInfo
 osAccess	os_unix.c	434;"	d	file:
 osAreFileApisANSI	os_win.c	496;"	d	file:
@@ -6480,9 +6494,11 @@ prereqRight	whereInt.h	/^  Bitmask prereqRight;    \/* Bitmask of tables used by
 prev	hash.h	/^  HashElem *next, *prev;       \/* Next and previous elements in the table *\/$/;"	m	struct:HashElem
 prev	mem3.c	/^      u32 prev;       \/* Index in mem3.aPool[] of previous free chunk *\/$/;"	m	struct:Mem3Block::__anon47::__anon49	file:
 prev	mem5.c	/^  int prev;       \/* Index of previous free chunk *\/$/;"	m	struct:Mem5Link	file:
+prev	s3_wrapper.c	/^    struct growbuffer *prev, *next;$/;"	m	struct:growbuffer	typeref:struct:growbuffer::growbuffer	file:
 prevSize	mem3.c	/^      u32 prevSize;   \/* Size of previous chunk in Mem3Block elements *\/$/;"	m	struct:Mem3Block::__anon47::__anon48	file:
 printAggInfo	select.c	/^static void printAggInfo(AggInfo *pAggInfo){$/;"	f	file:
 printExplainQueryPlan	test1.c	/^int printExplainQueryPlan(sqlite3_stmt *pStmt){$/;"	f
+print_nonnull	s3_wrapper.c	100;"	d	file:
 print_pager_state	pager.c	/^char *print_pager_state(Pager *p){$/;"	f
 printfFlags	sqliteInt.h	/^  u8   printfFlags;    \/* SQLITE_PRINTF flags below *\/$/;"	m	struct:sqlite3_str
 printfFunc	func.c	/^static void printfFunc($/;"	f	file:
@@ -6495,6 +6511,7 @@ progress_handler	sqlite3ext.h	/^  void  (*progress_handler)(sqlite3*,int,int(*)(
 propagateConstantExprRewrite	select.c	/^static int propagateConstantExprRewrite(Walker *pWalker, Expr *pExpr){$/;"	f	file:
 propagateConstantExprRewriteOne	select.c	/^static int propagateConstantExprRewriteOne($/;"	f	file:
 propagateConstants	select.c	/^static int propagateConstants($/;"	f	file:
+protocolG	s3_wrapper.c	/^static S3Protocol protocolG = S3ProtocolHTTPS;$/;"	v	file:
 proxyBreakConchLock	os_unix.c	/^static int proxyBreakConchLock(unixFile *pFile, uuid_t myHostID){$/;"	f	file:
 proxyCheckReservedLock	os_unix.c	/^static int proxyCheckReservedLock(sqlite3_file *id, int *pResOut) {$/;"	f	file:
 proxyClose	os_unix.c	/^static int proxyClose(sqlite3_file *id) {$/;"	f	file:
@@ -6539,9 +6556,13 @@ put32bits	pager.c	1113;"	d	file:
 put32bits	test_osinst.c	/^static void put32bits(unsigned char *p, unsigned int v){$/;"	f	file:
 put4byte	btreeInt.h	718;"	d
 putFts3Varint	test_hexio.c	/^static int putFts3Varint(char *p, sqlite_int64 v){$/;"	f	file:
+putObjectDataCallback	s3_wrapper.c	/^static int putObjectDataCallback(int bufferSize, char *buffer,$/;"	f	file:
 putVarint	sqliteInt.h	5074;"	d
 putVarint32	sqliteInt.h	5070;"	d
 putVarint64	util.c	/^static int SQLITE_NOINLINE putVarint64(unsigned char *p, u64 v){$/;"	f	file:
+put_object	s3_wrapper.c	/^void put_object() {$/;"	f
+put_object_callback_data	s3_wrapper.c	/^typedef struct put_object_callback_data {$/;"	s	file:
+put_object_callback_data	s3_wrapper.c	/^} put_object_callback_data;$/;"	t	typeref:struct:put_object_callback_data	file:
 pzErrMsg	sqliteInt.h	/^  char **pzErrMsg;    \/* Error message stored here *\/$/;"	m	struct:__anon42
 pzNeededCollation	test1.c	/^static char *pzNeededCollation = zNeededCollation;$/;"	v	file:
 querySharedCacheTableLock	btree.c	/^static int querySharedCacheTableLock(Btree *p, Pgno iTab, u8 eLock){$/;"	f	file:
@@ -6746,6 +6767,8 @@ resolveOutOfRangeError	resolve.c	/^static void resolveOutOfRangeError($/;"	f	fil
 resolveP2Values	vdbeaux.c	/^static void resolveP2Values(Vdbe *p, int *pMaxFuncArgs){$/;"	f	file:
 resolveRemoveWindowsCb	resolve.c	/^static int resolveRemoveWindowsCb(Walker *pWalker, Expr *pExpr){$/;"	f	file:
 resolveSelectStep	resolve.c	/^static int resolveSelectStep(Walker *pWalker, Select *p){$/;"	f	file:
+responseCompleteCallback	s3_wrapper.c	/^static void responseCompleteCallback(S3Status status,$/;"	f	file:
+responsePropertiesCallback	s3_wrapper.c	/^static S3Status responsePropertiesCallback$/;"	f	file:
 restoreCursorPosition	btree.c	874;"	d	file:
 restore_prng_state	test1.c	/^static int SQLITE_TCLAPI restore_prng_state($/;"	f	file:
 result_blob	sqlite3ext.h	/^  void  (*result_blob)(sqlite3_context*,const void*,int,void(*)(void*));$/;"	m	struct:sqlite3_api_routines
@@ -6772,6 +6795,7 @@ result_zeroblob64	sqlite3ext.h	/^  int (*result_zeroblob64)(sqlite3_context*,sql
 retRangeStart	os_unix.c	/^  unsigned long long retRangeStart; \/* nbr of 1st byte locked if successful *\/$/;"	m	struct:ByteRangeLockPB2	file:
 retTStep	sqliteInt.h	/^  TriggerStep retTStep; \/* The trigger step *\/$/;"	m	struct:Returning
 retTrig	sqliteInt.h	/^  Trigger retTrig;      \/* The transient trigger that implements RETURNING *\/$/;"	m	struct:Returning
+retriesG	s3_wrapper.c	/^static int retriesG = 5;$/;"	v	file:
 returnSingleInt	pragma.c	/^static void returnSingleInt(Vdbe *v, i64 value){$/;"	f	file:
 returnSingleText	pragma.c	/^static void returnSingleText($/;"	f	file:
 returning	parse.y	/^returning ::= .$/;"	l
@@ -6855,6 +6879,7 @@ schema_cursor	test_schema.c	/^typedef struct schema_cursor schema_cursor;$/;"	t	
 schema_vtab	test_schema.c	/^struct schema_vtab {$/;"	s	file:
 schema_vtab	test_schema.c	/^typedef struct schema_vtab schema_vtab;$/;"	t	typeref:struct:schema_vtab	file:
 searchWith	select.c	/^static struct Cte *searchWith($/;"	f	file:
+secretAccessKeyG	s3_wrapper.c	/^static const char *secretAccessKeyG = 0;$/;"	v	file:
 sectorSize	os_unix.c	/^  int sectorSize;                     \/* Device sector size *\/$/;"	m	struct:unixFile	file:
 sectorSize	pager.c	/^  u32 sectorSize;             \/* Assumed sector size during rollback *\/$/;"	m	struct:Pager	file:
 seekAndRead	os_unix.c	/^static int seekAndRead(unixFile *id, sqlite3_int64 offset, void *pBuf, int cnt){$/;"	f	file:
@@ -6920,12 +6945,15 @@ sharedMask	os_unix.c	/^  u16 sharedMask;            \/* Mask of shared locks hel
 sharedMask	os_unix.c	/^  u8 sharedMask;             \/* Mask of shared locks held *\/$/;"	m	struct:unixShmNode	file:
 sharedMask	os_win.c	/^  u16 sharedMask;            \/* Mask of shared locks held *\/$/;"	m	struct:winShm	file:
 sharedlock	test_vfs.c	/^  u32 sharedlock;                 \/* Mask of shared locks *\/$/;"	m	struct:TestvfsFd	file:
+should_retry	s3_wrapper.c	/^static int should_retry()$/;"	f	file:
 showAllWhereLoops	where.c	/^static void showAllWhereLoops(WhereInfo *pWInfo, WhereClause *pWC){$/;"	f	file:
+showResponsePropertiesG	s3_wrapper.c	/^static int showResponsePropertiesG = 0;$/;"	v	file:
 showSubprograms	vdbevtab.c	/^  int showSubprograms;       \/* Provide a listing of subprograms *\/$/;"	m	struct:bytecodevtab_cursor	file:
 signFunc	func.c	/^static void signFunc($/;"	f	file:
 signed	parse.y	/^signed ::= minus_num.$/;"	l
 signed	parse.y	/^signed ::= plus_num.$/;"	l
 simulateVtabError	test8.c	/^static int simulateVtabError(echo_vtab *p, const char *zMethod){$/;"	f	file:
+size	s3_wrapper.c	/^    int size;$/;"	m	struct:growbuffer	file:
 size4x	mem3.c	/^      u32 size4x;     \/* 4x the size of current chunk in Mem3Block elements *\/$/;"	m	struct:Mem3Block::__anon47::__anon48	file:
 sjfd	pager.c	/^  sqlite3_file *sjfd;         \/* File descriptor for sub-journal *\/$/;"	m	struct:Pager	file:
 skipFlag	vdbeInt.h	/^  u8 skipFlag;            \/* Skip accumulator loading if true *\/$/;"	m	struct:sqlite3_context
@@ -8246,14 +8274,14 @@ sqlite3WalBeginReadTransaction	wal.c	/^int sqlite3WalBeginReadTransaction(Wal *p
 sqlite3WalBeginReadTransaction	wal.h	32;"	d
 sqlite3WalBeginWriteTransaction	wal.c	/^int sqlite3WalBeginWriteTransaction(Wal *pWal){$/;"	f
 sqlite3WalBeginWriteTransaction	wal.h	35;"	d
-sqlite3WalCallback	wal.c	/^int sqlite3WalCallback(Wal *pWal){$/;"	f
+sqlite3WalCallback	wal.c	/^int sqlite3WalCallback(Wal *pWal) {$/;"	f
 sqlite3WalCallback	wal.h	42;"	d
 sqlite3WalCheckpoint	wal.c	/^int sqlite3WalCheckpoint($/;"	f
 sqlite3WalCheckpoint	wal.h	41;"	d
 sqlite3WalClose	wal.c	/^int sqlite3WalClose($/;"	f
 sqlite3WalClose	wal.h	31;"	d
 sqlite3WalDb	wal.c	/^void sqlite3WalDb(Wal *pWal, sqlite3 *db){$/;"	f
-sqlite3WalDb	wal.c	1954;"	d	file:
+sqlite3WalDb	wal.c	1955;"	d	file:
 sqlite3WalDbsize	wal.c	/^Pgno sqlite3WalDbsize(Wal *pWal){$/;"	f
 sqlite3WalDbsize	wal.h	34;"	d
 sqlite3WalDefaultHook	main.c	/^int sqlite3WalDefaultHook($/;"	f
@@ -9146,6 +9174,7 @@ sqlthread_spawn	test_thread.c	/^static int SQLITE_TCLAPI sqlthread_spawn($/;"	f	
 sqrFunc	test_autoext.c	/^static void sqrFunc($/;"	f	file:
 sqr_init	test_autoext.c	/^static int sqr_init($/;"	f	file:
 srclistRenumberCursors	select.c	/^static void srclistRenumberCursors($/;"	f	file:
+start	s3_wrapper.c	/^    int start;$/;"	m	struct:growbuffer	file:
 start	window.c	/^  WindowCsrAndReg start;$/;"	m	struct:WindowCodeArg	file:
 startEndFlag	os_unix.c	/^  unsigned char startEndFlag;       \/* 1=rel to end of fork, 0=rel to start *\/$/;"	m	struct:ByteRangeLockPB2	file:
 startTime	vdbeInt.h	/^  i64 startTime;          \/* Time when query started - used for profiling *\/$/;"	m	struct:Vdbe
@@ -9179,6 +9208,7 @@ statSizeAndOffset	dbstat.c	/^static void statSizeAndOffset(StatCursor *pCsr){$/;
 status	sqlite3ext.h	/^  int (*status)(int,int*,int*,int);$/;"	m	struct:sqlite3_api_routines
 status64	sqlite3ext.h	/^  int (*status64)(int,sqlite3_int64*,sqlite3_int64*,int);$/;"	m	struct:sqlite3_api_routines
 statusFunc	test_loadext.c	/^static void statusFunc($/;"	f	file:
+statusG	s3_wrapper.c	/^static int statusG = 0;$/;"	v	file:
 step	sqlite3ext.h	/^  int  (*step)(sqlite3_stmt*);$/;"	m	struct:sqlite3_api_routines
 step_list	sqliteInt.h	/^  TriggerStep *step_list; \/* Link list of trigger program steps             *\/$/;"	m	struct:Trigger
 stmtLast	tclsqlite.c	/^  SqlPreparedStmt *stmtLast; \/* Last statement in the list *\/$/;"	m	struct:SqliteDb	file:
@@ -9758,8 +9788,10 @@ toLocaltime	date.c	/^static int toLocaltime($/;"	f	file:
 token	vdbe.h	/^  void *token;                  \/* id that may be used to recursive triggers *\/$/;"	m	struct:SubProgram
 token	vdbeInt.h	/^  void *token;            \/* Copy of SubProgram.token *\/$/;"	m	struct:VdbeFrame
 totalAlloc	mem5.c	/^  u64 totalAlloc;     \/* Total of all malloc calls - includes internal frag *\/$/;"	m	struct:Mem5Global	file:
+totalContentLength	s3_wrapper.c	/^    uint64_t totalContentLength, totalOriginalContentLength;$/;"	m	struct:put_object_callback_data	file:
 totalExcess	mem5.c	/^  u64 totalExcess;    \/* Total internal fragmentation *\/$/;"	m	struct:Mem5Global	file:
 totalFinalize	func.c	/^static void totalFinalize(sqlite3_context *context){$/;"	f	file:
+totalOriginalContentLength	s3_wrapper.c	/^    uint64_t totalContentLength, totalOriginalContentLength;$/;"	m	struct:put_object_callback_data	file:
 total_changes	func.c	/^static void total_changes($/;"	f	file:
 total_changes	sqlite3ext.h	/^  int  (*total_changes)(sqlite3*);$/;"	m	struct:sqlite3_api_routines
 total_changes64	sqlite3ext.h	/^  sqlite3_int64 (*total_changes64)(sqlite3*);$/;"	m	struct:sqlite3_api_routines
@@ -9992,6 +10024,7 @@ uptr	sqliteInt.h	/^  typedef u32 uptr;$/;"	t
 uptr	sqliteInt.h	/^  typedef u64 uptr;$/;"	t
 uptr	sqliteInt.h	/^  typedef uintptr_t uptr;$/;"	t
 uriParameter	main.c	/^static const char *uriParameter(const char *zFilename, const char *zParam){$/;"	f	file:
+uriStyleG	s3_wrapper.c	/^static S3UriStyle uriStyleG = S3UriStylePath;$/;"	v	file:
 uri_boolean	sqlite3ext.h	/^  int (*uri_boolean)(const char*,const char*,int);$/;"	m	struct:sqlite3_api_routines
 uri_int64	sqlite3ext.h	/^  sqlite3_int64 (*uri_int64)(const char*,const char*,sqlite3_int64);$/;"	m	struct:sqlite3_api_routines
 uri_key	sqlite3ext.h	/^  const char *(*uri_key)(const char*,int);$/;"	m	struct:sqlite3_api_routines
@@ -10134,6 +10167,7 @@ vdbeUnbind	vdbeapi.c	/^static int vdbeUnbind(Vdbe *p, unsigned int i){$/;"	f	fil
 vdbeUnpackRecord	vdbeapi.c	/^static UnpackedRecord *vdbeUnpackRecord($/;"	f	file:
 vdbeVComment	vdbeaux.c	/^static void vdbeVComment(Vdbe *p, const char *zFormat, va_list ap){$/;"	f	file:
 verifyDbFile	os_unix.c	/^static void verifyDbFile(unixFile *pFile){$/;"	f	file:
+verifyPeerG	s3_wrapper.c	/^static int verifyPeerG = 0;$/;"	v	file:
 versionFunc	func.c	/^static void versionFunc($/;"	f	file:
 vfsCurrentTimeInt64	test1.c	/^static int SQLITE_TCLAPI vfsCurrentTimeInt64($/;"	f	file:
 vfsFlags	pager.c	/^  u32 vfsFlags;               \/* Flags for sqlite3_vfs.xOpen() *\/$/;"	m	struct:Pager	file:
@@ -10279,11 +10313,11 @@ walCkptInfo	wal.c	/^static volatile WalCkptInfo *walCkptInfo(Wal *pWal){$/;"	f	f
 walCleanupHash	wal.c	/^static void walCleanupHash(Wal *pWal){$/;"	f	file:
 walDecodeFrame	wal.c	/^static int walDecodeFrame($/;"	f	file:
 walDisableBlocking	wal.c	/^static void walDisableBlocking(Wal *pWal){$/;"	f	file:
-walDisableBlocking	wal.c	1952;"	d	file:
+walDisableBlocking	wal.c	1953;"	d	file:
 walEnableBlocking	wal.c	/^static int walEnableBlocking(Wal *pWal){$/;"	f	file:
-walEnableBlocking	wal.c	1951;"	d	file:
+walEnableBlocking	wal.c	1952;"	d	file:
 walEncodeFrame	wal.c	/^static void walEncodeFrame($/;"	f	file:
-walFrameOffset	wal.c	498;"	d	file:
+walFrameOffset	wal.c	499;"	d	file:
 walFramePage	wal.c	/^static int walFramePage(u32 iFrame){$/;"	f	file:
 walFramePgno	wal.c	/^static u32 walFramePgno(Wal *pWal, u32 iFrame){$/;"	f	file:
 walHash	wal.c	/^static int walHash(u32 iPage){$/;"	f	file:
@@ -10305,7 +10339,7 @@ walLockExclusive	wal.c	/^static int walLockExclusive(Wal *pWal, int lockIdx, int
 walLockName	wal.c	/^static const char *walLockName(int lockIdx){$/;"	f	file:
 walLockShared	wal.c	/^static int walLockShared(Wal *pWal, int lockIdx){$/;"	f	file:
 walLockWriter	wal.c	/^static int walLockWriter(Wal *pWal){$/;"	f	file:
-walLockWriter	wal.c	1953;"	d	file:
+walLockWriter	wal.c	1954;"	d	file:
 walMerge	wal.c	/^static void walMerge($/;"	f	file:
 walMergesort	wal.c	/^static void walMergesort($/;"	f	file:
 walNextHash	wal.c	/^static int walNextHash(int iPriorHash){$/;"	f	file:

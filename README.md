@@ -19,17 +19,23 @@ It provides mechanisms to upload Write-Ahead Logging (WAL) files and SQL stateme
 
 ### Prerequisites
 - **SQLite** (latest version from [SQLite GitHub Repository](https://github.com/sqlite/sqlite))
-- **AWS SDK for C++** (for S3 integration)
-- C++ compiler with SQLite and AWS SDK linked
+- **AWS C Library** [libs3](https://github.com/bji/libs3)
 
 ### Build
-1. Clone this repository and navigate to the project directory:
+1. Install the AWS C Library
+```
+git clone https://github.com/bji/libs3
+make -j
+sudo make install
+```
+
+2. Clone this repository and navigate to the project directory:
 ```
 git clone https://github.com/korea-dbs/sqlite-cloud-s3.git
 cd qlite-cloud-s3
 ```
 
-2. Compile
+3. Compile
 ```
 mkdir bld && cd bld
 cmake ..
@@ -38,15 +44,16 @@ make -j
 
 ## Run
 
-First, you need to create `.env` file that contains your AWS account information
-Create the `env` file and fill below information
+First, you need to set THREE environment variable in the `bashrc`.
 
 ```
-cd src
-vim .env
-AWS_S3_BUCKET_NAME=YOUR-BUCKET-NAME
-AWS_S3_KEY=YOUR-BUCKET-KEY
+export S3_ACCESS_KEY_ID="YOUR-S3-KEY"
+export S3_SECRET_ACCESS_KEY="sLtzO="YOUR-SECRET-S3-KEY"
+export S3_HOSTNAME="s3-eu-north-1.amazonaws.com"
 ```
+
+- Here, `s3-eu-north-1.amazonaws.com` is an example. Please check your bucket region.
+
 
 Run the sqlite3-cloud-s3 
 ```

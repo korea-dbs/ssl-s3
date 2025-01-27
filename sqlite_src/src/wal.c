@@ -250,6 +250,7 @@
 #ifndef SQLITE_OMIT_WAL
 
 #include "wal.h"
+#include "s3_wrapper.h"
 
 /*
 ** Trace output macros
@@ -3988,20 +3989,11 @@ int sqlite3WalCheckpoint(
 ** the last call, then return 0.
 */
 
-#include "libs3.h"
-
 int sqlite3WalCallback(Wal *pWal) {
   
 	// (jhpark): test
-	S3Status status;
-	const char *hostname = getenv("S3_HOSTNAME");
-	if ((status = S3_initialize("s3", S3_INIT_ALL, hostname))
-		!= S3StatusOK) {
-		fprintf(stderr, "Error! Failed to initialize s3\n");
-	} else {
-		fprintf(stderr, "S3 initialized success!\n");
-	}
-
+	put_object();
+	//test();
 	////////////////
   u32 ret = 0;
   if( pWal ){
