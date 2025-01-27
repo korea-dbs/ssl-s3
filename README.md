@@ -63,5 +63,5 @@ cd bld
 
 ## Contact
 
-Jonghyeok Park jonghyeok_park@korea.ac.kr
+Jonghyeok Park jonghyeok_park@korea.ac.kr  
 Yewon Shin syw22@hufs.ac.kr
