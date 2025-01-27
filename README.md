@@ -32,7 +32,7 @@ sudo make install
 2. Clone this repository and navigate to the project directory:
 ```
 git clone https://github.com/korea-dbs/sqlite-cloud-s3.git
-cd qlite-cloud-s3
+cd sqlite-cloud-s3
 ```
 
 3. Compile
