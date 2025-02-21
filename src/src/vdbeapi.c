@@ -820,14 +820,17 @@ int sqlite3_step(sqlite3_stmt *pStmt){
 
 
 #if (AWS_S3_RECV==3)
-
   // (jhpark): debug
   const char *full_sql = sqlite3_expanded_sql(pStmt);
   if (full_sql) {
 	  to_upper(full_sql);
 	  if (check_sql(full_sql) == 1) {
-		  memcpy(aws_ptr + aws_off, full_sql, strlen(full_sql));
+		memcpy(aws_ptr + aws_off, full_sql, strlen(full_sql));
 		aws_off += strlen(full_sql);
+		// add semicolon
+		const char semicolon = ';';
+		memcpy(aws_ptr+aws_off, &semicolon, 1);
+		aws_off++;
 	  }
   }
 #endif
