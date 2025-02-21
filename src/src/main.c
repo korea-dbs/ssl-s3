@@ -3201,6 +3201,7 @@ int aws_fd=0;
 uint64_t aws_off=0;
 uint64_t cur_aws_off=0;
 char* aws_ptr=NULL;
+char awsfile[128];
 
 /*
 ** This routine does the work of opening a database on behalf of
@@ -3537,9 +3538,9 @@ static int openDatabase(
 
   // (jhpark): create aws-purpose mmaped files
   // use static allocation 1GB
-  
+  /*
   off_t filesz = (1024*1024UL);
-  aws_fd = open("aws.txt", O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600); 
+  aws_fd = open(awsfile, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600); 
   if (aws_fd< 0) {
 	perror("mmap file open");
 	return -1;
@@ -3557,8 +3558,7 @@ static int openDatabase(
 	perror("Error mmapping the file");
 	return -1;
   }
-
- 
+   */
  
 opendb_out:
   if( db ){

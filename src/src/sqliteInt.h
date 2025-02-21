@@ -5613,4 +5613,5 @@ extern char* aws_ptr;
 extern uint64_t aws_off;
 extern uint64_t cur_aws_off;
 extern char aws_sql_buf[81920];
+extern char awsfile[128];
 #endif /* SQLITEINT_H */

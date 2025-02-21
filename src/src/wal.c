@@ -4012,7 +4012,8 @@ int sqlite3WalCallback(Wal *pWal){
 #elif (AWS_S3_RECV == 2)
 		// upload wal partial
 		ftruncate(aws_fd, aws_off);
-		sprintf(command, "aws s3api put-object --bucket ku-express-test--use1-az6--x-s3 --key wal-file/wal-partial.log --body \"%s\" --write-offset-bytes %ld --content-length %ld > /dev/null", "aws.txt", cur_aws_off ,aws_off);
+		sprintf(command, "aws s3api put-object --bucket ku-express-test--use1-az6--x-s3 --key wal-file/wal-partial.log --body \"%s\" --write-offset-bytes %ld --content-length %ld > /dev/null"
+				, awsfile, cur_aws_off ,aws_off);
 		if (system(command) != 0) {
 			fprintf(stderr, "error aws upload!\n");
 		} else {
@@ -4030,7 +4031,8 @@ int sqlite3WalCallback(Wal *pWal){
 		if (aws_off != cur_aws_off && aws_off!=0) {
 			//
 		ftruncate(aws_fd, aws_off);
-		sprintf(command, "aws s3api put-object --bucket ku-express-test--use1-az6--x-s3 --key sql-file/sql.log --body \"%s\" --write-offset-bytes %ld --content-length %ld > /dev/null", "aws.txt", cur_aws_off, aws_off);
+		sprintf(command, "aws s3api put-object --bucket ku-express-test--use1-az6--x-s3 --key sql-file/sql.log --body \"%s\" --write-offset-bytes %ld --content-length %ld > /dev/null"
+				, awsfile, cur_aws_off, aws_off);
 
 		if (system(command) != 0) {
 			fprintf(stderr, "error aws upload!\n");

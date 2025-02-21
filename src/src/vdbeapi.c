@@ -789,11 +789,48 @@ end_of_step:
 ** sqlite3Step() to do most of the work.  If a schema error occurs,
 ** call sqlite3Reprepare() and try again.
 */
+
+// TODO(jhpark):opt
+static void to_upper(char *str) {
+    while (*str) {
+        *str = toupper((unsigned char)*str);
+        str++;
+    }
+}
+static int check_sql(char *sql) {
+	if (
+		(strstr(sql, "INSERT") != NULL) ||
+		(strstr(sql, "UPDATE") != NULL) ||
+		(strstr(sql, "DELETE") != NULL) ||
+		(strstr(sql, "CREATE") != NULL)
+	){
+		return 1;
+	}
+	return 0;
+}
+
+// (jhpark): add 
+char aws_sql_buf[81920];
+
 int sqlite3_step(sqlite3_stmt *pStmt){
   int rc = SQLITE_OK;      /* Result from sqlite3Step() */
   Vdbe *v = (Vdbe*)pStmt;  /* the prepared statement */
   int cnt = 0;             /* Counter to prevent infinite loop of reprepares */
   sqlite3 *db;             /* The database connection */
+
+
+#if (AWS_S3_RECV==3)
+
+  // (jhpark): debug
+  const char *full_sql = sqlite3_expanded_sql(pStmt);
+  if (full_sql) {
+	  to_upper(full_sql);
+	  if (check_sql(full_sql) == 1) {
+		  memcpy(aws_ptr + aws_off, full_sql, strlen(full_sql));
+		aws_off += strlen(full_sql);
+	  }
+  }
+#endif
 
   if( vdbeSafetyNotNull(v) ){
     return SQLITE_MISUSE_BKPT;

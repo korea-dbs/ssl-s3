@@ -60,4 +60,4 @@ debug/
 
 .env
 tags/
-sqlite_src/src/tags/
+src/tags

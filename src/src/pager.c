@@ -4862,6 +4862,33 @@ int sqlite3PagerOpen(
     pPager->zWal = (char*)pPtr;
     memcpy(pPtr, zPathname, nPathname);   pPtr += nPathname;
     memcpy(pPtr, "-wal", 4);              pPtr += 4 + 1;
+
+	// (jhpark): create -aws file
+#if (AWS_S3_RECV > 1)
+	sprintf(awsfile, "%s-aws", zPathname);
+	off_t filesz = (1024*1024UL);
+	aws_fd = open(awsfile, O_RDWR | O_CREAT | O_TRUNC, (mode_t)0600); 
+  if (aws_fd< 0) {
+	perror("mmap file open");
+	return -1;
+  }
+
+  if (ftruncate(aws_fd,filesz) < 0) {
+	fprintf(stderr, "error!!!\n");
+	perror("fturncate");
+	return -1;
+  }
+ 
+  aws_ptr = mmap(0, filesz, PROT_READ | PROT_WRITE, MAP_SHARED, aws_fd, 0);
+  if(aws_ptr == MAP_FAILED) {
+	close(aws_fd);
+	perror("Error mmapping the file");
+	return -1;
+  }
+
+  fprintf(stderr, "[INFO] AWS File created %s\n", awsfile);
+#endif
+
 #ifdef SQLITE_ENABLE_8_3_NAMES
     sqlite3FileSuffix3(zFilename, pPager->zWal);
     pPtr = (u8*)(pPager->zWal + sqlite3Strlen30(pPager->zWal)+1);

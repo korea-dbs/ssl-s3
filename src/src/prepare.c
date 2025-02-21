@@ -779,6 +779,7 @@ static int sqlite3Prepare(
     }else{
       sParse.zTail = &zSql[nBytes];
     }
+
   }else{
     sqlite3RunParser(&sParse, zSql);
   }
@@ -830,6 +831,8 @@ end_prepare:
   sqlite3ParseObjectReset(&sParse);
   return rc;
 }
+
+
 static int sqlite3LockAndPrepare(
   sqlite3 *db,              /* Database handle. */
   const char *zSql,         /* UTF-8 encoded SQL statement. */
@@ -841,6 +844,7 @@ static int sqlite3LockAndPrepare(
 ){
   int rc;
   int cnt = 0;
+
 
 #ifdef SQLITE_ENABLE_API_ARMOR
   if( ppStmt==0 ) return SQLITE_MISUSE_BKPT;
@@ -917,8 +921,6 @@ int sqlite3Reprepare(Vdbe *p){
 ** occurs.
 */
 
-// (jhpark): add 
-char aws_sql_buf[81920];
 int sqlite3_prepare(
   sqlite3 *db,              /* Database handle. */
   const char *zSql,         /* UTF-8 encoded SQL statement. */
@@ -930,25 +932,6 @@ int sqlite3_prepare(
   rc = sqlite3LockAndPrepare(db,zSql,nBytes,0,0,ppStmt,pzTail);
   assert( rc==SQLITE_OK || ppStmt==0 || *ppStmt==0 );  /* VERIFY: F13021 */
   return rc;
-}
-
-// (jhpark): add
-static void to_upper(char *str) {
-    while (*str) {
-        *str = toupper((unsigned char)*str);
-        str++;
-    }
-}
-static int check_sql(char *sql) {
-	if (
-		(strstr(sql, "INSERT") != NULL) ||
-		(strstr(sql, "UPDATE") != NULL) ||
-		(strstr(sql, "DELETE") != NULL) ||
-		(strstr(sql, "CREATE") != NULL)
-	){
-		return 1;
-	}
-	return 0;
 }
 
 int sqlite3_prepare_v2(
@@ -965,19 +948,9 @@ int sqlite3_prepare_v2(
   **
   ** Proof in that the 5th parameter to sqlite3LockAndPrepare is 0 */
 
-  // (jhpark): extract the **update** sql
-  // (jhpark): <length> <sql> 
-#if (AWS_S3_RECV==3)
-  to_upper(zSql);
-  if (check_sql(zSql) == 1) {
-	  strcpy(aws_sql_buf, zSql);
-	  memcpy(aws_ptr + aws_off, zSql, strlen(zSql));
-	  aws_off += strlen(zSql);
-  }
-#endif
-
   rc = sqlite3LockAndPrepare(db,zSql,nBytes,SQLITE_PREPARE_SAVESQL,0,
                              ppStmt,pzTail);
+
   assert( rc==SQLITE_OK || ppStmt==0 || *ppStmt==0 );
   return rc;
 }
@@ -1000,6 +973,7 @@ int sqlite3_prepare_v3(
   rc = sqlite3LockAndPrepare(db,zSql,nBytes,
                  SQLITE_PREPARE_SAVESQL|(prepFlags&SQLITE_PREPARE_MASK),
                  0,ppStmt,pzTail);
+
   assert( rc==SQLITE_OK || ppStmt==0 || *ppStmt==0 );
   return rc;
 }
