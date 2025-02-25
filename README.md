@@ -73,7 +73,7 @@ In the 'sqlite3WalCallback' function, find and modify the sprintf statement that
 sprintf(command, "aws s3api put-object --bucket <your-bucket-name> --key <your-bucket-key> --body \"%s\" > /dev/null", pWal->zWalName); 
 ```
 
-6. Compie
+6. Compile
 ```
 cd ../../bld
 make clean && make -j
