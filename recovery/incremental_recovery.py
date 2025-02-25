@@ -7,22 +7,22 @@ import time
 from botocore.exceptions import ClientError
 from datetime import datetime
 
-# 로깅 설정
+# logging configuration
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
 
-# S3 클라이언트 설정
+# S3 client configuration
 s3_client = boto3.client('s3')
-bucket_name = 'ku-express-test--use1-az6--x-s3'
-bucket_key = 'wal-file/wal-partial.log'
-db_path = '/home/ids/ssd/tpcc_300.db'
+bucket_name = 'your-bucket-name'
+bucket_key = 'your-bucket-key'
+db_path = 'path-to-your-db'
 wal_file = db_path + '-wal'
 
 def calculate_file_hash(file_path):
-    """파일의 MD5 해시를 계산"""
+    """Calculate the MD5 hash of a file"""
     hash_md5 = hashlib.md5()
     with open(file_path, "rb") as f:
         for chunk in iter(lambda: f.read(4096), b""):
@@ -30,7 +30,7 @@ def calculate_file_hash(file_path):
     return hash_md5.hexdigest()
 
 def verify_file_permissions(file_path):
-    """파일 권한 확인 및 수정"""
+    """Check and modify file permissions"""
     try:
         os.chmod(file_path, 0o644)
         return True
@@ -39,7 +39,7 @@ def verify_file_permissions(file_path):
         return False
 
 def sync_file_to_disk(file_path):
-    """파일을 디스크에 동기화"""
+    """Sync files to disk"""
     try:
         with open(file_path, 'rb') as f:
             os.fsync(f.fileno())
@@ -49,15 +49,15 @@ def sync_file_to_disk(file_path):
         return False
 
 def cleanup_db_files(db_path):
-    """데이터베이스 관련 파일들(WAL, SHM) 정리"""
+    """Remove database related files (WAL, SHM)"""
     try:
-        # WAL 파일 정리
+        # Remove WAL file
         wal_path = db_path + '-wal'
         if os.path.exists(wal_path):
             os.remove(wal_path)
             logger.info(f"Removed WAL file: {wal_path}")
 
-        # SHM 파일 정리
+        # Remove SHM file
         shm_path = db_path + '-shm'
         if os.path.exists(shm_path):
             os.remove(shm_path)
@@ -69,31 +69,31 @@ def cleanup_db_files(db_path):
         return False
 
 def download_from_s3(bucket, key, local_path):
-    """S3에서 파일을 다운로드하고 무결성 검증"""
+    """Download files from S3 and verify their integrity"""
     download_start_time = time.time()
     try:
-        # 파일 메타데이터 가져오기
+        # Get file metadata
         response = s3_client.head_object(Bucket=bucket, Key=key)
         s3_size = response['ContentLength']
         
-        # 파일 다운로드
+        # Download file
         s3_client.download_file(bucket, key, local_path)
 
-        # 다운로드된 파일 크기 확인
+        # Check downloaded file size
         local_size = os.path.getsize(local_path)
         if local_size != s3_size:
             logger.error(f"File size mismatch. S3: {s3_size}, Local: {local_size}")
             return False, 0
 
-        # 파일 권한 설정
+        # Set file permissions
         if not verify_file_permissions(local_path):
             return False, 0
 
-        # 파일 동기화
+        # file sync
         if not sync_file_to_disk(local_path):
             return False, 0
 
-        # 다운로드 완료 후 잠시 대기
+        # Wait a moment after download is complete
         time.sleep(1)
 
         download_time = time.time() - download_start_time
@@ -108,31 +108,31 @@ def download_from_s3(bucket, key, local_path):
         return False, 0
 
 def test_database(db_path):
-    """데이터베이스 동작 테스트"""
+    """Test database behavior"""
     conn = None
     try:
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         
-        # 1. 데이터베이스 읽기 테스트
+        # 1. Database read test
         cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
         tables = cursor.fetchall()
         if not tables:
             logger.warning("No tables found in database")
             return False
         
-        # 2. 테스트 테이블 생성
+        # 2. Create test table
         test_table = f"test_table_{int(time.time())}"
         cursor.execute(f"CREATE TABLE {test_table} (id INTEGER PRIMARY KEY, test_data TEXT)")
         
-        # 3. 데이터 쓰기 테스트
+        # 3. Data Write Test
         cursor.execute(f"INSERT INTO {test_table} (test_data) VALUES (?)", ("test_data",))
         
-        # 4. 데이터 읽기 테스트
+        # 4. Data Read Test
         cursor.execute(f"SELECT * FROM {test_table}")
         result = cursor.fetchone()
         
-        # 5. 테스트 테이블 삭제
+        # 5. Delete test table
         cursor.execute(f"DROP TABLE {test_table}")
         
         conn.commit()
@@ -149,14 +149,14 @@ def test_database(db_path):
         return False
     finally:
         if conn:
-            # WAL 모드 비활성화
+            # Disable WAL mode
             conn.execute('PRAGMA journal_mode=DELETE')
             conn.commit()
             conn.close()
             cleanup_db_files(db_path)
 
 def apply_wal_checkpoint(db_path, wal_path):
-    """WAL 파일을 데이터베이스에 체크포인트"""
+    """Checkpoint WAL files into database"""
     backup_path = wal_path + '.backup'
     download_time = 0
     checkpoint_start_time = 0
@@ -172,11 +172,11 @@ def apply_wal_checkpoint(db_path, wal_path):
             os.rename(wal_path, backup_path)
             logger.info(f"Existing WAL file backed up to {backup_path}")
 
-        # S3에서 WAL 파일 다운로드 및 시간 측정
+        # Download WAL file from S3 / Measure time
         download_success, download_time = download_from_s3(bucket_name, bucket_key, wal_path)
         
         if download_success:
-            # 체크포인트 시작 시간 기록
+            # Record checkpoint start time
             checkpoint_start_time = time.time()
             
             conn = sqlite3.connect(db_path, isolation_level=None)
@@ -185,15 +185,15 @@ def apply_wal_checkpoint(db_path, wal_path):
                 conn.execute('PRAGMA synchronous=NORMAL')
                 conn.execute('PRAGMA wal_checkpoint(TRUNCATE)')
                 
-                # 체크포인트 완료 시간 계산
+                # Calculate checkpoint completion time
                 checkpoint_time = time.time() - checkpoint_start_time
                 logger.info(f"Checkpoint completed successfully in {checkpoint_time:.2f} seconds")
                 
-                # WAL 모드 비활성화
+                # Disable WAL mode
                 conn.execute('PRAGMA journal_mode=DELETE')
                 conn.commit()
                 
-                # 데이터베이스 테스트 수행
+                # Perform database testing
                 if not test_database(db_path):
                     logger.error("Database functionality test failed after checkpoint")
                     return False, download_time, checkpoint_time
@@ -224,7 +224,7 @@ def apply_wal_checkpoint(db_path, wal_path):
                 os.remove(backup_path)
                 logger.info("Backup file cleaned up")
         
-        # 최종 파일 정리 확인
+        # Finally check file cleanup
         cleanup_db_files(db_path)
 
 if __name__ == "__main__":
@@ -245,5 +245,5 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(f"Error in main execution: {str(e)}")
     finally:
-        # 프로그램 종료 전 최종 파일 정리
+        # Final file cleanup before program termination
         cleanup_db_files(db_path)

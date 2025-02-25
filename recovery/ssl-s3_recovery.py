@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 def download_log_from_s3(bucket_name, file_key, local_path):
-    """S3에서 로그 파일 다운로드"""
+    """Download log files from S3"""
     try:
         start_time = time.time()
         s3_client = boto3.client('s3')
@@ -12,11 +12,11 @@ def download_log_from_s3(bucket_name, file_key, local_path):
         download_time = time.time() - start_time
         return download_time
     except Exception as e:
-        print(f"S3 다운로드 중 오류 발생: {str(e)}")
+        print(f"Error downloading S3: {str(e)}")
         raise
 
 def parse_sql_log(log_path):
-    """SQL 로그 파일 파싱하여 개별 SQL 문장으로 분리"""
+    """Parse the SQL log file and separate it into individual SQL statements."""
     sql_statements = []
     
     with open(log_path, 'r') as f:
@@ -36,14 +36,14 @@ def parse_sql_log(log_path):
     return sql_statements
 
 def execute_recovery(db_path, sql_statements):
-    """SQL 문 실행하여 데이터베이스 복구"""
+    """Recover database by executing SQL statements"""
     conn = None
     try:
         start_time = time.time()
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         
-        # 복구 SQL 트랜잭션으로 실행
+        # Run as a recovery SQL transaction
         cursor.execute("BEGIN TRANSACTION;")
         
         for sql in sql_statements:
@@ -54,13 +54,13 @@ def execute_recovery(db_path, sql_statements):
         recovery_time = time.time() - start_time
         return conn, recovery_time
     except Exception as e:
-        print(f"복구 중 오류 발생: {str(e)}")
+        print(f"Error occurred during recovery: {str(e)}")
         if conn:
             cursor.execute("ROLLBACK;")
         raise
 
 def test_database(conn):
-    """데이터베이스 복구 상태 테스트"""
+    """Test database recovery status"""
     try:
         cursor = conn.cursor()
         cursor.execute("BEGIN TRANSACTION;")
@@ -80,37 +80,37 @@ def test_database(conn):
         cursor.execute("COMMIT;")
         return all_results, True
     except Exception as e:
-        print(f"테스트 중 오류 발생: {str(e)}")
+        print(f"Error occurred during test: {str(e)}")
         cursor.execute("ROLLBACK;")
         return None, False
 
 def main():
-    # 설정
-    bucket_name = "ku-express-test--use1-az6--x-s3"
-    file_key = "sql-file/sql.log"
+    # Configuration
+    bucket_name = "your-bucket-name"
+    file_key = "your-bucket-key"
     local_log_path = "downloaded_sql.log"
-    db_path = "/home/ids/ssd/tpcc_300.db"
+    db_path = "path-to-your-db"
     
     try:
-        # 다운로드 및 복구 수행
+        # Download and perform recovery
         download_time = download_log_from_s3(bucket_name, file_key, local_log_path)
         sql_statements = parse_sql_log(local_log_path)
         conn, recovery_time = execute_recovery(db_path, sql_statements)
         
-        # 테스트 수행
+        # Perform tests
         results, test_result = test_database(conn)
         
-        # 최종 결과 출력
-        print("\n=== 복구 작업 결과 ===")
-        print(f"다운로드 시간: {download_time:.2f}초")
-        print(f"복구 실행 시간: {recovery_time:.2f}초")
-        print(f"총 소요 시간: {(download_time + recovery_time):.2f}초")
-        print(f"복구 상태: {'성공' if test_result else '실패'}")
+        # Final result output
+        print("\n=== Recovery operation results ===")
+        print(f"Download time: {download_time:.2f}s")
+        print(f"Recovery execution time: {recovery_time:.2f}s")
+        print(f"Total time: {(download_time + recovery_time):.2f}s")
+        print(f"Recovery status: {'Success' if test_result else 'Fail'}")
         
         conn.close()
         
     except Exception as e:
-        print(f"오류 발생: {str(e)}")
+        print(f"An error occurred: {str(e)}")
 
 if __name__ == "__main__":
     main()
