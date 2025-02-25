@@ -38,22 +38,46 @@ make -j
 sudo make install
 ```
 
-2. Install the boto3 Library
-```
-pip2 install boto3
-```
-
-3. Clone this repository and navigate to the project directory:
+2. Clone this repository and navigate to the project directory:
 ```
 git clone https://github.com/korea-dbs/sqlite-cloud-s3.git
 cd sqlite-cloud-s3
 ```
 
-4. Compile
+3. Configure
 ```
 mkdir bld && cd bld
-cmake ..
-make -j
+../src/configure
+```
+
+4. Select Mode
+```
+vi Makefile
+```
+Change the -DAWS_S3_RECV value in Makefile. The upload mode corresponding to each number is as follows:
+- 1: Upload entire WAL files (general bucket)
+- 2: WAL file partial upload (express bucket)
+- 3: Upload SQL file (express bucket)
+```
+CC = gcc
+CFLAGS =   -g -O2 -DSQLITE_OS_UNIX=1 -DAWS_S3_RECV=2
+```
+
+5. Please modify bucket_name and bucket_key to suit your environment.
+```
+cd ../src/src
+vi wal.c
+```
+In the 'sqlite3WalCallback' function, find and modify the sprintf statement that looks like the example below that operates in the selected mode.
+```
+sprintf(command, "aws s3api put-object --bucket <your-bucket-name> --key <your-bucket-key> --body \"%s\" > /dev/null", pWal->zWalName); 
+```
+
+6. Compie
+```
+cd ../../bld
+make clean && make -j
+sudo make install -j
 ```
 
 ## Run
@@ -75,7 +99,16 @@ cd bld
 ./sqliet3-cloud-s3
 ```
 
-First, you need to modify three variables in the python script file to suit your environment.
+If you perform it repeatedly, you must go into the s3 bucket, delete the files, and perform a new operation.
+
+## Recovery
+
+Install the boto3 Library
+```
+pip2 install boto3
+```
+
+Modify three variables in the python script file to suit your environment.
 ```
 bucket_name="your_bucket_name"
 bucket_key="path_in_the_bucket"
