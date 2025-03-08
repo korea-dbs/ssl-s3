@@ -1,0 +1,15 @@
+# Recovery Time breakdown (s3 Get vs. Recovery)
+"Snapshot"       77.3  3.2
+"Incremental"    56.7  3.7
+"SSL-S3"		 6.3   6.2	
+
+
+
+#"Snapshot"       46.0  2.5
+#"Incremental"    40.0  2.3
+#"SSL-S3"		 4.7   6.0	
+
+#"Snapshot"       24.9  3.3
+#"Incremental"    20.6  2.7
+#"SSL-S3"		 4.4   4.6	
+
